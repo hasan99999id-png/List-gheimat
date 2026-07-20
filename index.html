@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>لیست قیمت قطعات خودرو</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;700&display=swap" rel="stylesheet">
+
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Vazirmatn,sans-serif;
+}
+
+body{
+background:#f5f7fb;
+padding:20px;
+}
+
+.container{
+max-width:700px;
+margin:auto;
+}
+
+h1{
+text-align:center;
+margin-bottom:20px;
+color:#222;
+}
+
+.search{
+width:100%;
+padding:15px;
+border:none;
+border-radius:12px;
+font-size:16px;
+box-shadow:0 5px 15px rgba(0,0,0,.08);
+margin-bottom:20px;
+outline:none;
+}
+
+.card{
+background:#fff;
+padding:18px;
+border-radius:15px;
+margin-bottom:12px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+box-shadow:0 4px 15px rgba(0,0,0,.07);
+transition:.3s;
+}
+
+.card:hover{
+transform:translateY(-2px);
+}
+
+.name{
+font-size:17px;
+font-weight:700;
+color:#222;
+}
+
+.price{
+background:#0ea5e9;
+color:#fff;
+padding:8px 14px;
+border-radius:10px;
+font-weight:bold;
+white-space:nowrap;
+}
+
+.empty{
+text-align:center;
+color:#777;
+padding:30px;
+display:none;
+}
+</style>
+
+</head>
+<body>
+
+<div class="container">
+
+<h1>🚗 لیست قیمت قطعات خودرو</h1>
+
+<input
+id="search"
+class="search"
+type="text"
+placeholder="جستجوی نام کالا...">
+
+<div id="list"></div>
+
+<div id="empty" class="empty">
+کالایی پیدا نشد
+</div>
+
+</div>
+
+<!-- فایل کالاها -->
+<script src="products.js"></script>
+
+<script>
+
+const list=document.getElementById("list");
+const search=document.getElementById("search");
+const empty=document.getElementById("empty");
+
+function show(data){
+
+let html="";
+
+if(data.length===0){
+list.innerHTML="";
+empty.style.display="block";
+return;
+}
+
+empty.style.display="none";
+
+data.forEach(item=>{
+
+html+=`
+<div class="card">
+<div class="name">${item.name}</div>
+<div class="price">${item.price}</div>
+</div>
+`;
+
+});
+
+list.innerHTML=html;
+
+}
+
+show(products);
+
+search.addEventListener("input",()=>{
+
+const value=search.value.trim();
+
+const result=products.filter(item=>
+item.name.includes(value)
+);
+
+show(result);
+
+});
+
+</script>
+
+</body>
+  </html>
