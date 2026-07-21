@@ -10,7 +10,14 @@
 
 <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;600;800&display=swap" rel="stylesheet">
 
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+
 <style>
+
 
 *{
 margin:0;
@@ -38,27 +45,35 @@ margin:auto;
 
 
 
-/* هدر */
 
 .header{
 
 background:linear-gradient(135deg,#0284c7,#38bdf8);
+
 color:white;
+
 padding:35px;
+
 border-radius:25px;
+
 text-align:center;
-margin-bottom:25px;
+
+margin-bottom:20px;
+
 box-shadow:0 15px 35px rgba(2,132,199,.25);
 
 }
 
 
+
 .header h1{
 
 font-size:30px;
+
 margin-bottom:10px;
 
 }
+
 
 
 .header p{
@@ -69,82 +84,105 @@ opacity:.9;
 
 
 
-/* تعداد */
 
-.counter{
-
-background:white;
-border-radius:18px;
-padding:15px;
-margin-bottom:20px;
-text-align:center;
-box-shadow:0 5px 20px rgba(0,0,0,.08);
-color:#0284c7;
-font-weight:bold;
-
-}
-
-
-
-#count{
-
-font-size:25px;
-
-}
-
-
-
-/* سرچ */
 
 .search-box{
 
 background:white;
+
 padding:15px;
+
 border-radius:20px;
-margin-bottom:25px;
+
 box-shadow:0 5px 20px rgba(0,0,0,.08);
 
+margin-bottom:10px;
+
 }
+
 
 
 .search{
 
 width:100%;
+
 padding:15px;
+
 border:none;
+
 outline:none;
+
 background:#f8fafc;
+
 border-radius:15px;
+
 font-size:16px;
 
 }
 
 
 
-/* جدول */
+
+
+.pdf-area{
+
+text-align:left;
+
+margin-bottom:20px;
+
+}
+
+
+
+.pdf-btn{
+
+background:#0284c7;
+
+color:white;
+
+border:none;
+
+padding:7px 14px;
+
+border-radius:10px;
+
+font-size:13px;
+
+cursor:pointer;
+
+}
+
+
+
+.pdf-btn:hover{
+
+background:#0369a1;
+
+}
+
+
+
+
 
 .table-box{
 
 background:white;
+
 border-radius:25px;
-overflow:hidden;
+
+padding:15px;
+
 box-shadow:0 10px 35px rgba(0,0,0,.08);
 
 }
 
 
-.table-scroll{
-
-overflow-x:auto;
-
-}
-
 
 table{
 
 width:100%;
+
 border-collapse:collapse;
-min-width:650px;
 
 }
 
@@ -153,15 +191,16 @@ min-width:650px;
 thead{
 
 background:#0284c7;
+
 color:white;
 
 }
 
 
+
 th{
 
-padding:18px;
-font-size:16px;
+padding:16px;
 
 }
 
@@ -170,28 +209,23 @@ font-size:16px;
 td{
 
 padding:15px;
+
 text-align:center;
+
 border-bottom:1px solid #e5e7eb;
+
 color:#334155;
+
 vertical-align:middle;
 
 }
 
 
 
-tr:hover{
-
-background:#f0f9ff;
-
-}
-
-
-
-/* ستون ها */
-
 .code{
 
 color:#0284c7;
+
 font-weight:800;
 
 }
@@ -200,10 +234,9 @@ font-weight:800;
 
 .name{
 
-max-width:380px;
-white-space:normal;
-overflow-wrap:anywhere;
 line-height:1.9;
+
+overflow-wrap:anywhere;
 
 }
 
@@ -212,27 +245,91 @@ line-height:1.9;
 .price{
 
 color:#16a34a;
+
 font-weight:800;
+
 white-space:nowrap;
 
 }
 
 
 
-/* خالی */
+
+.cards{
+
+display:none;
+
+}
+
+
+
+
+.product-card{
+
+background:white;
+
+padding:18px;
+
+border-radius:18px;
+
+margin-bottom:15px;
+
+box-shadow:0 5px 20px rgba(0,0,0,.08);
+
+}
+
+
+
+.card-code{
+
+color:#0284c7;
+
+font-weight:bold;
+
+}
+
+
+
+.card-name{
+
+margin:15px 0;
+
+line-height:2;
+
+color:#334155;
+
+}
+
+
+
+.card-price{
+
+color:#16a34a;
+
+font-size:18px;
+
+font-weight:800;
+
+}
+
+
+
+
 
 .empty{
 
 display:none;
-padding:40px;
+
 text-align:center;
+
+padding:40px;
+
 color:#64748b;
 
 }
 
 
 
-/* موبایل */
 
 @media(max-width:700px){
 
@@ -244,11 +341,13 @@ padding:10px;
 }
 
 
+
 .header{
 
 padding:25px 15px;
 
 }
+
 
 
 .header h1{
@@ -258,16 +357,26 @@ font-size:22px;
 }
 
 
-th,td{
 
-padding:12px 8px;
+.table-box table{
+
+display:none;
 
 }
 
 
-.name{
 
-max-width:220px;
+.cards{
+
+display:block;
+
+}
+
+
+
+.pdf-area{
+
+text-align:center;
 
 }
 
@@ -276,6 +385,7 @@ max-width:220px;
 
 
 </style>
+
 
 </head>
 
@@ -289,37 +399,40 @@ max-width:220px;
 
 <div class="header">
 
-<h1>🚗 لیست قیمت قطعات خودرو</h1>
+
+<h1>
+
+🚗 لیست قیمت قطعات خودرو
+
+</h1>
+
 
 <p>
+
 جستجو و مشاهده قیمت قطعات
+
 </p>
 
-</div>
-
-
-
-
-<div class="counter">
-
-تعداد کل قطعات:
-
-<div id="count">
-0
-</div>
 
 </div>
+
 
 
 
 
 <div class="search-box">
 
+
 <input
+
 class="search"
+
 id="search"
+
 placeholder="🔍 جستجوی نام کالا یا کد کالا..."
+
 >
+
 
 </div>
 
@@ -327,9 +440,24 @@ placeholder="🔍 جستجوی نام کالا یا کد کالا..."
 
 
 
-<div class="table-box">
+<div class="pdf-area">
 
-<div class="table-scroll">
+
+<button class="pdf-btn" onclick="savePDF()">
+
+📄 ذخیره PDF
+
+</button>
+
+
+</div>
+
+
+
+
+
+<div class="table-box" id="pdfContent">
+
 
 
 <table>
@@ -358,6 +486,10 @@ placeholder="🔍 جستجوی نام کالا یا کد کالا..."
 </table>
 
 
+
+
+<div class="cards" id="cards">
+
 </div>
 
 
@@ -369,50 +501,49 @@ placeholder="🔍 جستجوی نام کالا یا کد کالا..."
 </div>
 
 
-</div>
-
 
 </div>
 
 
-
-
-
+</div>
 <script>
 
 
-const list=document.getElementById("list");
-const search=document.getElementById("search");
-const empty=document.getElementById("empty");
-const count=document.getElementById("count");
+const list = document.getElementById("list");
+const cards = document.getElementById("cards");
+const search = document.getElementById("search");
+const empty = document.getElementById("empty");
 
 
-let products=[];
+let products = [];
 
 
+
+// دریافت اطلاعات از Google Sheet
 
 fetch("https://docs.google.com/spreadsheets/d/1OImD12FCHFiDxzN-h8lBWox2gM2jCmaAntPI_NjfWsg/gviz/tq?tqx=out:json")
 
 
-.then(res=>res.text())
+.then(res => res.text())
 
 
-.then(text=>{
+.then(text => {
 
 
-const json=JSON.parse(text.substring(47).slice(0,-2));
+const json = JSON.parse(text.substring(47).slice(0,-2));
 
 
-products=json.table.rows.map(row=>{
+
+products = json.table.rows.map(row => {
 
 
 return {
 
-code:row.c[0]?.v?.toString() || "",
+code: row.c[0]?.v?.toString() || "",
 
-name:row.c[1]?.v?.toString() || "",
+name: row.c[1]?.v?.toString() || "",
 
-price:row.c[2]?.v?.toString() || ""
+price: row.c[2]?.v?.toString() || ""
 
 };
 
@@ -421,17 +552,17 @@ price:row.c[2]?.v?.toString() || ""
 
 
 
-count.innerHTML=products.length.toLocaleString("fa-IR");
-
-
 show(products);
 
 
 })
 
-.catch(error=>{
 
-console.log(error);
+.catch(error => {
+
+
+console.log("خطا در دریافت اطلاعات:",error);
+
 
 });
 
@@ -439,23 +570,31 @@ console.log(error);
 
 
 
+
+// تبدیل قیمت به ریال
+
+
 function formatPrice(price){
 
 
-let num=price.replace(/,/g,"");
+let num = price.replace(/,/g,"");
 
 
-if(!isNaN(num) && num!==""){
+if(!isNaN(num) && num !== ""){
 
-return Number(num).toLocaleString("fa-IR")+" تومان";
+
+return Number(num).toLocaleString("fa-IR") + " ریال";
+
+
+}
+
+
+return price + " ریال";
+
 
 }
 
 
-return price;
-
-
-}
 
 
 
@@ -464,37 +603,50 @@ return price;
 function show(data){
 
 
-let html="";
+let tableHTML = "";
+
+let cardHTML = "";
 
 
 
-if(data.length===0){
+if(data.length === 0){
+
 
 list.innerHTML="";
 
+cards.innerHTML="";
+
 empty.style.display="block";
+
 
 return;
 
 }
 
 
+
 empty.style.display="none";
 
 
 
-data.forEach(item=>{
 
 
-html+=`
+data.forEach(item => {
+
+
+
+tableHTML += `
+
 
 <tr>
+
 
 <td class="code">
 
 ${item.code}
 
 </td>
+
 
 
 <td class="name">
@@ -504,6 +656,7 @@ ${item.name}
 </td>
 
 
+
 <td class="price">
 
 ${formatPrice(item.price)}
@@ -511,16 +664,62 @@ ${formatPrice(item.price)}
 </td>
 
 
+
 </tr>
 
+
 `;
+
+
+
+
+
+
+cardHTML += `
+
+
+<div class="product-card">
+
+
+<div class="card-code">
+
+کد کالا: ${item.code}
+
+</div>
+
+
+
+<div class="card-name">
+
+${item.name}
+
+</div>
+
+
+
+<div class="card-price">
+
+${formatPrice(item.price)}
+
+</div>
+
+
+</div>
+
+
+`;
+
 
 
 });
 
 
 
-list.innerHTML=html;
+list.innerHTML = tableHTML;
+
+
+cards.innerHTML = cardHTML;
+
 
 
 }
@@ -528,13 +727,20 @@ list.innerHTML=html;
 
 
 
+
+
+
+// جستجو
+
+
 search.addEventListener("input",()=>{
 
 
-let value=search.value.trim();
+let value = search.value.trim();
 
 
-let result=products.filter(item=>
+
+let result = products.filter(item =>
 
 
 item.name.includes(value) ||
@@ -549,7 +755,93 @@ item.code.includes(value)
 show(result);
 
 
+
 });
+
+
+
+
+
+
+
+// ذخیره PDF
+
+
+async function savePDF(){
+
+
+
+const element = document.getElementById("pdfContent");
+
+
+
+const canvas = await html2canvas(element,{
+
+scale:2
+
+});
+
+
+
+const imgData = canvas.toDataURL("image/png");
+
+
+
+const {jsPDF} = window.jspdf;
+
+
+
+const pdf = new jsPDF("p","mm","a4");
+
+
+
+const width = 190;
+
+
+const height = canvas.height * width / canvas.width;
+
+
+
+pdf.addImage(
+
+imgData,
+
+"PNG",
+
+10,
+
+10,
+
+width,
+
+height
+
+);
+
+
+
+pdf.save("لیست-قیمت-قطعات.pdf");
+
+
+
+}
+
+
+
+
+
+
+
+// رفرش خودکار هر یک دقیقه
+
+
+setInterval(()=>{
+
+
+location.reload();
+
+
+},60000);
 
 
 
