@@ -27,10 +27,12 @@ font-family:'Vazirmatn',sans-serif;
 }
 
 
+
 body{
 
-background:#f1f5f9;
+background:#050505;
 padding:20px;
+color:white;
 
 }
 
@@ -45,22 +47,18 @@ margin:auto;
 
 
 
+/* header */
+
 
 .header{
 
-background:linear-gradient(135deg,#0284c7,#38bdf8);
-
-color:white;
-
-padding:35px;
-
+background:linear-gradient(135deg,#111,#1c1c1c);
+border:2px solid #d4af37;
+padding:30px;
 border-radius:25px;
-
 text-align:center;
-
 margin-bottom:20px;
-
-box-shadow:0 15px 35px rgba(2,132,199,.25);
+box-shadow:0 0 35px rgba(212,175,55,.25);
 
 }
 
@@ -68,8 +66,8 @@ box-shadow:0 15px 35px rgba(2,132,199,.25);
 
 .header h1{
 
+color:#ffd700;
 font-size:30px;
-
 margin-bottom:10px;
 
 }
@@ -78,7 +76,7 @@ margin-bottom:10px;
 
 .header p{
 
-opacity:.9;
+color:#bbb;
 
 }
 
@@ -86,17 +84,17 @@ opacity:.9;
 
 
 
+
+/* search */
+
+
 .search-box{
 
-background:white;
-
-padding:15px;
-
-border-radius:20px;
-
-box-shadow:0 5px 20px rgba(0,0,0,.08);
-
-margin-bottom:10px;
+background:#111;
+border:1px solid #333;
+padding:10px;
+border-radius:16px;
+margin-bottom:15px;
 
 }
 
@@ -105,74 +103,41 @@ margin-bottom:10px;
 .search{
 
 width:100%;
-
-padding:15px;
-
+height:42px;
 border:none;
-
 outline:none;
-
-background:#f8fafc;
-
-border-radius:15px;
-
-font-size:16px;
-
-}
-
-
-
-
-
-.pdf-area{
-
-text-align:left;
-
-margin-bottom:20px;
-
-}
-
-
-
-.pdf-btn{
-
-background:#0284c7;
-
+background:#050505;
+border:1px solid #444;
+border-radius:12px;
+padding:0 15px;
+font-size:15px;
 color:white;
 
-border:none;
+}
 
-padding:7px 14px;
 
-border-radius:10px;
 
-font-size:13px;
+.search:focus{
 
-cursor:pointer;
+border-color:#d4af37;
+box-shadow:0 0 12px rgba(212,175,55,.3);
 
 }
 
 
 
-.pdf-btn:hover{
-
-background:#0369a1;
-
-}
 
 
-
+/* table */
 
 
 .table-box{
 
-background:white;
-
-border-radius:25px;
-
-padding:15px;
-
-box-shadow:0 10px 35px rgba(0,0,0,.08);
+background:#111;
+border-radius:22px;
+border:1px solid #333;
+overflow:hidden;
+box-shadow:0 10px 30px rgba(0,0,0,.5);
 
 }
 
@@ -181,7 +146,6 @@ box-shadow:0 10px 35px rgba(0,0,0,.08);
 table{
 
 width:100%;
-
 border-collapse:collapse;
 
 }
@@ -190,9 +154,8 @@ border-collapse:collapse;
 
 thead{
 
-background:#0284c7;
-
-color:white;
+background:linear-gradient(135deg,#b8860b,#ffd700);
+color:#000;
 
 }
 
@@ -201,6 +164,7 @@ color:white;
 th{
 
 padding:16px;
+font-weight:800;
 
 }
 
@@ -208,15 +172,19 @@ padding:16px;
 
 td{
 
-padding:15px;
-
+padding:14px;
 text-align:center;
-
-border-bottom:1px solid #e5e7eb;
-
-color:#334155;
-
+border-bottom:1px solid #292929;
+color:#ddd;
 vertical-align:middle;
+
+}
+
+
+
+tr:hover{
+
+background:#1b1b1b;
 
 }
 
@@ -224,9 +192,8 @@ vertical-align:middle;
 
 .code{
 
-color:#0284c7;
-
-font-weight:800;
+color:#ffd700;
+font-weight:bold;
 
 }
 
@@ -234,9 +201,10 @@ font-weight:800;
 
 .name{
 
-line-height:1.9;
-
+max-width:500px;
+white-space:normal;
 overflow-wrap:anywhere;
+line-height:1.9;
 
 }
 
@@ -244,10 +212,8 @@ overflow-wrap:anywhere;
 
 .price{
 
-color:#16a34a;
-
+color:#4ade80;
 font-weight:800;
-
 white-space:nowrap;
 
 }
@@ -255,63 +221,86 @@ white-space:nowrap;
 
 
 
-.cards{
 
-display:none;
+/* PDF */
+
+
+.pdf-area{
+
+text-align:center;
+padding:20px 0;
+
+}
+
+
+
+.pdf-btn{
+
+background:linear-gradient(135deg,#b8860b,#ffd700);
+color:#000;
+border:none;
+padding:8px 18px;
+border-radius:12px;
+font-size:13px;
+font-weight:bold;
+cursor:pointer;
+
+}
+
+
+
+.pdf-btn:hover{
+
+transform:scale(1.05);
 
 }
 
 
 
 
-.product-card{
 
-background:white;
+/* contact */
 
-padding:18px;
 
-border-radius:18px;
+.contact-box{
 
+margin-top:20px;
+background:#111;
+border:1px solid #333;
+border-radius:22px;
+padding:25px;
+text-align:center;
+box-shadow:0 10px 30px rgba(0,0,0,.4);
+
+}
+
+
+
+.contact-box h3{
+
+color:#ffd700;
 margin-bottom:15px;
 
-box-shadow:0 5px 20px rgba(0,0,0,.08);
+}
+
+
+
+.contact-box p{
+
+color:#ddd;
+margin:10px;
 
 }
 
 
 
-.card-code{
+.contact-box a{
 
-color:#0284c7;
-
+color:#ffd700;
+text-decoration:none;
 font-weight:bold;
 
 }
-
-
-
-.card-name{
-
-margin:15px 0;
-
-line-height:2;
-
-color:#334155;
-
-}
-
-
-
-.card-price{
-
-color:#16a34a;
-
-font-size:18px;
-
-font-weight:800;
-
-}
-
 
 
 
@@ -319,16 +308,16 @@ font-weight:800;
 .empty{
 
 display:none;
-
 text-align:center;
-
 padding:40px;
-
-color:#64748b;
+color:#aaa;
 
 }
 
 
+
+
+/* mobile */
 
 
 @media(max-width:700px){
@@ -342,14 +331,6 @@ padding:10px;
 
 
 
-.header{
-
-padding:25px 15px;
-
-}
-
-
-
 .header h1{
 
 font-size:22px;
@@ -358,31 +339,31 @@ font-size:22px;
 
 
 
-.table-box table{
+th,td{
 
-display:none;
-
-}
-
-
-
-.cards{
-
-display:block;
+padding:10px 5px;
+font-size:13px;
 
 }
 
 
 
-.pdf-area{
+.name{
 
-text-align:center;
+max-width:180px;
+
+}
+
+
+
+.search{
+
+height:38px;
 
 }
 
 
 }
-
 
 </style>
 
@@ -396,32 +377,21 @@ text-align:center;
 <div class="container">
 
 
-
 <div class="header">
 
-
 <h1>
-
 🚗 لیست قیمت قطعات خودرو
-
 </h1>
 
-
 <p>
-
 جستجو و مشاهده قیمت قطعات
-
 </p>
-
 
 </div>
 
 
 
-
-
 <div class="search-box">
-
 
 <input
 
@@ -429,49 +399,34 @@ class="search"
 
 id="search"
 
-placeholder="🔍 جستجوی نام کالا یا کد کالا..."
+placeholder="🔍 جستجوی کالا یا کد کالا..."
 
 >
 
-
 </div>
-
-
-
-
-
-<div class="pdf-area">
-
-
-<button class="pdf-btn" onclick="savePDF()">
-
-📄 ذخیره PDF
-
-</button>
-
-
-</div>
-
-
 
 
 
 <div class="table-box" id="pdfContent">
 
 
-
 <table>
-
 
 <thead>
 
 <tr>
 
-<th>کد کالا</th>
+<th>
+کد کالا
+</th>
 
-<th>عنوان کالا</th>
+<th>
+عنوان کالا
+</th>
 
-<th>قیمت</th>
+<th>
+قیمت
+</th>
 
 </tr>
 
@@ -486,14 +441,6 @@ placeholder="🔍 جستجوی نام کالا یا کد کالا..."
 </table>
 
 
-
-
-<div class="cards" id="cards">
-
-</div>
-
-
-
 <div id="empty" class="empty">
 
 کالایی پیدا نشد
@@ -501,354 +448,50 @@ placeholder="🔍 جستجوی نام کالا یا کد کالا..."
 </div>
 
 
-
 </div>
 
 
-</div>
-<script>
 
+<div class="pdf-area">
 
-const list = document.getElementById("list");
-const cards = document.getElementById("cards");
-const search = document.getElementById("search");
-const empty = document.getElementById("empty");
+<button class="pdf-btn" onclick="savePDF()">
 
+📄 ذخیره PDF
 
-let products = [];
-
-
-
-// دریافت اطلاعات از Google Sheet
-
-fetch("https://docs.google.com/spreadsheets/d/1OImD12FCHFiDxzN-h8lBWox2gM2jCmaAntPI_NjfWsg/gviz/tq?tqx=out:json")
-
-
-.then(res => res.text())
-
-
-.then(text => {
-
-
-const json = JSON.parse(text.substring(47).slice(0,-2));
-
-
-
-products = json.table.rows.map(row => {
-
-
-return {
-
-code: row.c[0]?.v?.toString() || "",
-
-name: row.c[1]?.v?.toString() || "",
-
-price: row.c[2]?.v?.toString() || ""
-
-};
-
-
-});
-
-
-
-show(products);
-
-
-})
-
-
-.catch(error => {
-
-
-console.log("خطا در دریافت اطلاعات:",error);
-
-
-});
-
-
-
-
-
-
-// تبدیل قیمت به ریال
-
-
-function formatPrice(price){
-
-
-let num = price.replace(/,/g,"");
-
-
-if(!isNaN(num) && num !== ""){
-
-
-return Number(num).toLocaleString("fa-IR") + " ریال";
-
-
-}
-
-
-return price + " ریال";
-
-
-}
-
-
-
-
-
-
-
-function show(data){
-
-
-let tableHTML = "";
-
-let cardHTML = "";
-
-
-
-if(data.length === 0){
-
-
-list.innerHTML="";
-
-cards.innerHTML="";
-
-empty.style.display="block";
-
-
-return;
-
-}
-
-
-
-empty.style.display="none";
-
-
-
-
-
-data.forEach(item => {
-
-
-
-tableHTML += `
-
-
-<tr>
-
-
-<td class="code">
-
-${item.code}
-
-</td>
-
-
-
-<td class="name">
-
-${item.name}
-
-</td>
-
-
-
-<td class="price">
-
-${formatPrice(item.price)}
-
-</td>
-
-
-
-</tr>
-
-
-`;
-
-
-
-
-
-
-cardHTML += `
-
-
-<div class="product-card">
-
-
-<div class="card-code">
-
-کد کالا: ${item.code}
+</button>
 
 </div>
 
 
 
-<div class="card-name">
+<div class="contact-box">
 
-${item.name}
+
+<h3>
+📞 اطلاعات تماس
+</h3>
+
+
+<p>
+☎️ تماس:
+<a href="tel:09924389248">
+09924389248
+</a>
+</p>
+
+
+<p>
+💬 واتساپ:
+<a href="https://wa.me/989924389248">
+09924389248
+</a>
+</p>
+
+
+<p>
+📱 روبیکا:
+09924389248
+</p>
+
 
 </div>
-
-
-
-<div class="card-price">
-
-${formatPrice(item.price)}
-
-</div>
-
-
-</div>
-
-
-`;
-
-
-
-});
-
-
-
-list.innerHTML = tableHTML;
-
-
-cards.innerHTML = cardHTML;
-
-
-
-}
-
-
-
-
-
-
-
-// جستجو
-
-
-search.addEventListener("input",()=>{
-
-
-let value = search.value.trim();
-
-
-
-let result = products.filter(item =>
-
-
-item.name.includes(value) ||
-
-item.code.includes(value)
-
-
-);
-
-
-
-show(result);
-
-
-
-});
-
-
-
-
-
-
-
-// ذخیره PDF
-
-
-async function savePDF(){
-
-
-
-const element = document.getElementById("pdfContent");
-
-
-
-const canvas = await html2canvas(element,{
-
-scale:2
-
-});
-
-
-
-const imgData = canvas.toDataURL("image/png");
-
-
-
-const {jsPDF} = window.jspdf;
-
-
-
-const pdf = new jsPDF("p","mm","a4");
-
-
-
-const width = 190;
-
-
-const height = canvas.height * width / canvas.width;
-
-
-
-pdf.addImage(
-
-imgData,
-
-"PNG",
-
-10,
-
-10,
-
-width,
-
-height
-
-);
-
-
-
-pdf.save("لیست-قیمت-قطعات.pdf");
-
-
-
-}
-
-
-
-
-
-
-
-// رفرش خودکار هر یک دقیقه
-
-
-setInterval(()=>{
-
-
-location.reload();
-
-
-},60000);
-
-
-
-</script>
-
-
-
-</body>
-
-</html>
