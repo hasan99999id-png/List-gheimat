@@ -495,3 +495,311 @@ placeholder="🔍 جستجوی کالا یا کد کالا..."
 
 
 </div>
+<script>
+
+
+const list = document.getElementById("list");
+const search = document.getElementById("search");
+const empty = document.getElementById("empty");
+
+
+let products = [];
+
+
+
+// دریافت اطلاعات از Google Sheet
+
+fetch("https://docs.google.com/spreadsheets/d/1OImD12FCHFiDxzN-h8lBWox2gM2jCmaAntPI_NjfWsg/gviz/tq?tqx=out:json")
+
+
+.then(res => res.text())
+
+
+.then(text => {
+
+
+const json = JSON.parse(text.substring(47).slice(0,-2));
+
+
+
+products = json.table.rows.map(row => {
+
+
+return {
+
+code: row.c[0]?.v?.toString() || "",
+
+name: row.c[1]?.v?.toString() || "",
+
+price: row.c[2]?.v?.toString() || ""
+
+};
+
+
+});
+
+
+
+show(products);
+
+
+})
+
+
+.catch(error => {
+
+
+console.log("خطا در دریافت اطلاعات:",error);
+
+
+});
+
+
+
+
+
+
+
+// تبدیل قیمت به ریال
+
+
+function formatPrice(price){
+
+
+let num = price.replace(/,/g,"");
+
+
+
+if(!isNaN(num) && num !== ""){
+
+
+return Number(num).toLocaleString("fa-IR") + " ریال";
+
+
+}
+
+
+return price + " ریال";
+
+
+}
+
+
+
+
+
+
+
+
+function show(data){
+
+
+let html = "";
+
+
+
+if(data.length === 0){
+
+
+list.innerHTML = "";
+
+empty.style.display="block";
+
+
+return;
+
+}
+
+
+
+empty.style.display="none";
+
+
+
+
+
+data.forEach(item=>{
+
+
+html += `
+
+
+<tr>
+
+
+<td class="code">
+
+${item.code}
+
+</td>
+
+
+
+<td class="name">
+
+${item.name}
+
+</td>
+
+
+
+<td class="price">
+
+${formatPrice(item.price)}
+
+</td>
+
+
+
+</tr>
+
+
+`;
+
+
+
+});
+
+
+
+list.innerHTML = html;
+
+
+}
+
+
+
+
+
+
+
+// جستجو
+
+
+search.addEventListener("input",()=>{
+
+
+let value = search.value.trim();
+
+
+
+let result = products.filter(item =>
+
+
+item.name.includes(value) ||
+
+item.code.includes(value)
+
+
+);
+
+
+
+show(result);
+
+
+
+});
+
+
+
+
+
+
+
+// ساخت PDF
+
+
+async function savePDF(){
+
+
+
+const element = document.getElementById("pdfContent");
+
+
+
+const canvas = await html2canvas(element,{
+
+scale:2
+
+});
+
+
+
+const imgData = canvas.toDataURL("image/png");
+
+
+
+const {jsPDF} = window.jspdf;
+
+
+
+const pdf = new jsPDF(
+
+"p",
+
+"mm",
+
+"a4"
+
+);
+
+
+
+const width = 190;
+
+
+
+const height = canvas.height * width / canvas.width;
+
+
+
+pdf.addImage(
+
+imgData,
+
+"PNG",
+
+10,
+
+10,
+
+width,
+
+height
+
+);
+
+
+
+pdf.save("لیست-قیمت-قطعات.pdf");
+
+
+}
+
+
+
+
+
+
+
+
+// بروزرسانی خودکار هر دقیقه
+
+
+setInterval(()=>{
+
+
+location.reload();
+
+
+},60000);
+
+
+
+</script>
+
+
+</body>
+
+</html>
