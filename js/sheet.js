@@ -85,7 +85,11 @@ function renderProducts(list) {
         box.innerHTML += `
 <div class="card">
 
-    <img src="https://placehold.co/400x250?text=Auto+Part">
+    <img
+    src="images/${item.code}.jpg"
+    alt="${item.name}"
+    onerror="this.src='images/no-image.jpg'"
+>
 
     <div class="card-body">
 
