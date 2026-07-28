@@ -28,8 +28,11 @@ fetch(URL)
     document.getElementById("status").innerHTML =
       products.length + " کالا";
 
-    document.getElementById("loader").style.display = "none";
+    const loader = document.getElementById("loader");
 
+if (loader) {
+    loader.style.display = "none";
+}
   })
   .catch(err => {
 
