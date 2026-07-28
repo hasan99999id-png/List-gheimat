@@ -1,53 +1,116 @@
+// ===============================
+// Google Sheets
+// ===============================
+
 const SHEET_ID = "1OImD12FCHFiDxzN-h8lBWox2gM2jCmaAntPI_NjfWsg";
 const GID = "0";
 
-const URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?gid=${GID}`;
+const URL =
+`https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&gid=${GID}`;
 
 let products = [];
 
-fetch(URL)
-  .then(res => res.text())
-  .then(rep => {
+// دریافت اطلاعات
+async function loadProducts() {
 
-    const data = JSON.parse(rep.substring(47).slice(0, -2));
+    const status = document.getElementById("status");
+    const loader = document.getElementById("loader");
 
-    const rows = data.table.rows;
+    try {
 
-    rows.forEach(r => {
+        status.innerHTML = "در حال دریافت اطلاعات...";
 
-      products.push({
-        code: r.c[0] ? r.c[0].v : "",
-        name: r.c[1] ? r.c[1].v : "",
-        price: r.c[2] ? r.c[2].v : ""
-      });
+        const response = await fetch(URL);
+
+        const text = await response.text();
+
+        const json = JSON.parse(text.substring(47).slice(0, -2));
+
+        const rows = json.table.rows;
+
+        products = [];
+
+        rows.forEach(row => {
+
+            if (!row.c) return;
+
+            products.push({
+
+                code: row.c[0] ? row.c[0].v : "",
+
+                name: row.c[1] ? row.c[1].v : "",
+
+                price: row.c[2] ? row.c[2].v : ""
+
+            });
+
+        });
+
+        renderProducts(products);
+
+        status.innerHTML = products.length + " کالا";
+
+        if (loader)
+            loader.style.display = "none";
+
+        if (typeof animateCards === "function")
+            animateCards();
+
+    }
+
+    catch (err) {
+
+        console.error(err);
+
+        status.innerHTML = "خطا در دریافت اطلاعات";
+
+        if (loader)
+            loader.style.display = "none";
+
+    }
+
+}
+
+// نمایش کالاها
+function renderProducts(list) {
+
+    const box = document.getElementById("products");
+
+    if (!box) return;
+
+    box.innerHTML = "";
+
+    list.forEach(item => {
+
+        box.innerHTML += `
+<div class="card">
+
+    <img src="https://placehold.co/400x250?text=Auto+Part">
+
+    <div class="card-body">
+
+        <h3>${item.name}</h3>
+
+        <div class="code">
+            کد کالا: ${item.code}
+        </div>
+
+        <div class="price">
+            ${Number(item.price || 0).toLocaleString("fa-IR")} تومان
+        </div>
+
+        <a href="#" class="btn">
+            مشاهده
+        </a>
+
+    </div>
+
+</div>
+`;
 
     });
 
-    renderProducts(products);
-    if (typeof animateCards === "function") {
-    animateCards();
-    }
-
-    document.getElementById("status").innerHTML =
-      products.length + " کالا";
-
-    const loader = document.getElementById("loader");
-
-if (loader) {
-    loader.style.display = "none";
 }
-  })
-  .catch(err => {
 
-    console.log(err);
-
-    document.getElementById("status").innerHTML =
-        "خطا در دریافت اطلاعات";
-
-    const loader = document.getElementById("loader");
-
-    if (loader) {
-        loader.style.display = "none";
-    }
-
-});
+// شروع
+document.addEventListener("DOMContentLoaded", loadProducts);
