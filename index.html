@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<title>فروشگاه قطعات خودرو</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:tahoma;
+}
+
+body{
+background:#f2f2f2;
+}
+
+header{
+background:#d50000;
+color:white;
+padding:20px;
+text-align:center;
+font-size:28px;
+font-weight:bold;
+}
+
+.container{
+width:95%;
+max-width:1100px;
+margin:auto;
+padding:20px;
+}
+
+.search{
+width:100%;
+padding:15px;
+font-size:18px;
+border:none;
+border-radius:10px;
+margin-bottom:20px;
+box-shadow:0 2px 8px rgba(0,0,0,.15);
+outline:none;
+}
+
+table{
+width:100%;
+border-collapse:collapse;
+background:white;
+box-shadow:0 2px 10px rgba(0,0,0,.1);
+}
+
+th{
+background:#222;
+color:white;
+padding:15px;
+}
+
+td{
+padding:15px;
+text-align:center;
+border-bottom:1px solid #eee;
+}
+
+tr:hover{
+background:#fafafa;
+}
+
+.loading{
+text-align:center;
+font-size:22px;
+padding:40px;
+}
+
+.error{
+text-align:center;
+color:red;
+padding:20px;
+font-size:18px;
+}
+
+footer{
+margin-top:30px;
+padding:20px;
+text-align:center;
+color:#777;
+}
+
+@media(max-width:700px){
+
+table{
+font-size:14px;
+}
+
+th,td{
+padding:10px;
+}
+
+header{
+font-size:22px;
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+فروشگاه قطعات خودرو
+
+</header>
+
+<div class="container">
+
+<input
+id="search"
+class="search"
+type="text"
+placeholder="جستجو بر اساس کد یا نام کالا">
+
+<div id="loading" class="loading">
+
+در حال دریافت اطلاعات...
+
+</div>
+
+<div id="error" class="error"></div>
+
+<table id="table" style="display:none">
+
+<thead>
+
+<tr>
+
+<th>کد کالا</th>
+
+<th>نام کالا</th>
+
+<th>قیمت</th>
+
+</tr>
+
+</thead>
+
+<tbody id="tbody">
+
+</tbody>
+
+</table>
+
+</div>
+
+<footer>
+
+قدرت گرفته از Google Sheets
+
+</footer>
+
+<script>
+
+// ===============================
+// آدرس شیت را بعداً اینجا قرار بده
+// ===============================
+
+const SHEET_URL = "";
+
+// لیست کالاها
+let products = [];
+
+// دریافت اطلاعات
+async function loadProducts() {
+
+    if (!SHEET_URL) {
+        document.getElementById("loading").style.display = "none";
+        document.getElementById("error").innerHTML =
+            "لینک Google Sheet تنظیم نشده است.";
+        return;
+    }
+
+    try {
+
+        const res = await fetch(SHEET_URL);
+
+        const text = await res.text();
+
+        const json = JSON.parse(
+            text.substring(47).slice(0, -2)
+        );
+
+        const rows = json.table.rows;
+
+        products = [];
+
+        rows.forEach(row => {
+
+            if (!row.c) return;
+
+            products.push({
+
+                code: row.c[0]?.v ?? "",
+
+                name: row.c[1]?.v ?? "",
+
+                price: row.c[2]?.v ?? ""
+
+            });
+
+        });
+
+        showProducts(products);
+
+        document.getElementById("loading").style.display = "none";
+
+        document.getElementById("table").style.display = "table";
+
+    }
+
+    catch (e) {
+
+        document.getElementById("loading").style.display = "none";
+
+        document.getElementById("error").innerHTML =
+            "خطا در دریافت اطلاعات از شیت.";
+
+        console.log(e);
+
+    }
+
+}
+
+// نمایش کالاها
+function showProducts(list) {
+
+    const tbody = document.getElementById("tbody");
+
+    tbody.innerHTML = "";
+
+    list.forEach(item => {
+
+        tbody.innerHTML += `
+
+<tr>
+
+<td>${item.code}</td>
+
+<td>${item.name}</td>
+
+<td>${Number(item.price).toLocaleString("fa-IR")} تومان</td>
+
+</tr>
+
+`;
+
+    });
+
+}
+
+// جستجو
+document.getElementById("search").addEventListener("input", function () {
+
+    const value = this.value.trim();
+
+    const result = products.filter(item =>
+
+        String(item.code).includes(value) ||
+
+        String(item.name).includes(value)
+
+    );
+
+    showProducts(result);
+
+});
+
+// شروع برنامه
+loadProducts();
+
+</script>
+
+</body>
+
+</html>
