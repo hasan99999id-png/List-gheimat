@@ -3,7 +3,7 @@
 // ===============================
 
 // بعداً لینک Google Sheets را اینجا قرار بده
-const SHEET_URL = "";
+const SHEET_URL = "https://docs.google.com/spreadsheets/d/1OImD12FCHFiDxzN-h8lBWox2gM2jCmaAntPI_NjfWsg/edit?usp=drivesdk";
 
 // آرایه محصولات
 let products = [];
