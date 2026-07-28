@@ -1,805 +1,291 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
-
 <head>
 
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 
-<title>لیست قیمت قطعات خودرو</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;600;800&display=swap" rel="stylesheet">
-
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-
+<title>فروشگاه قطعات خودرو</title>
 
 <style>
-
 
 *{
 margin:0;
 padding:0;
 box-sizing:border-box;
-font-family:'Vazirmatn',sans-serif;
+font-family:tahoma;
 }
-
-
 
 body{
-
-background:#050505;
-padding:20px;
-color:white;
-
+background:#f2f2f2;
 }
 
-
+header{
+background:#d50000;
+color:white;
+padding:20px;
+text-align:center;
+font-size:28px;
+font-weight:bold;
+}
 
 .container{
-
-max-width:1150px;
+width:95%;
+max-width:1100px;
 margin:auto;
-
+padding:20px;
 }
-
-
-
-/* header */
-
-
-.header{
-
-background:linear-gradient(135deg,#111,#1c1c1c);
-border:2px solid #d4af37;
-padding:30px;
-border-radius:25px;
-text-align:center;
-margin-bottom:20px;
-box-shadow:0 0 35px rgba(212,175,55,.25);
-
-}
-
-
-
-.header h1{
-
-color:#ffd700;
-font-size:30px;
-margin-bottom:10px;
-
-}
-
-
-
-.header p{
-
-color:#bbb;
-
-}
-
-
-
-
-
-
-/* search */
-
-
-.search-box{
-
-background:#111;
-border:1px solid #333;
-padding:10px;
-border-radius:16px;
-margin-bottom:15px;
-
-}
-
-
 
 .search{
-
 width:100%;
-height:42px;
+padding:15px;
+font-size:18px;
 border:none;
+border-radius:10px;
+margin-bottom:20px;
+box-shadow:0 2px 8px rgba(0,0,0,.15);
 outline:none;
-background:#050505;
-border:1px solid #444;
-border-radius:12px;
-padding:0 15px;
-font-size:15px;
-color:white;
-
 }
-
-
-
-.search:focus{
-
-border-color:#d4af37;
-box-shadow:0 0 12px rgba(212,175,55,.3);
-
-}
-
-
-
-
-
-/* table */
-
-
-.table-box{
-
-background:#111;
-border-radius:22px;
-border:1px solid #333;
-overflow:hidden;
-box-shadow:0 10px 30px rgba(0,0,0,.5);
-
-}
-
-
 
 table{
-
 width:100%;
 border-collapse:collapse;
-
+background:white;
+box-shadow:0 2px 10px rgba(0,0,0,.1);
 }
-
-
-
-thead{
-
-background:linear-gradient(135deg,#b8860b,#ffd700);
-color:#000;
-
-}
-
-
 
 th{
-
-padding:16px;
-font-weight:800;
-
+background:#222;
+color:white;
+padding:15px;
 }
-
-
 
 td{
-
-padding:14px;
+padding:15px;
 text-align:center;
-border-bottom:1px solid #292929;
-color:#ddd;
-vertical-align:middle;
-
+border-bottom:1px solid #eee;
 }
-
-
 
 tr:hover{
-
-background:#1b1b1b;
-
+background:#fafafa;
 }
 
-
-
-.code{
-
-color:#ffd700;
-font-weight:bold;
-
-}
-
-
-
-.name{
-
-max-width:500px;
-white-space:normal;
-overflow-wrap:anywhere;
-line-height:1.9;
-
-}
-
-
-
-.price{
-
-color:#4ade80;
-font-weight:800;
-white-space:nowrap;
-
-}
-
-
-
-
-
-/* PDF */
-
-
-.pdf-area{
-
+.loading{
 text-align:center;
-padding:20px 0;
-
-}
-
-
-
-.pdf-btn{
-
-background:linear-gradient(135deg,#b8860b,#ffd700);
-color:#000;
-border:none;
-padding:8px 18px;
-border-radius:12px;
-font-size:13px;
-font-weight:bold;
-cursor:pointer;
-
-}
-
-
-
-.pdf-btn:hover{
-
-transform:scale(1.05);
-
-}
-
-
-
-
-
-/* contact */
-
-
-.contact-box{
-
-margin-top:20px;
-background:#111;
-border:1px solid #333;
-border-radius:22px;
-padding:25px;
-text-align:center;
-box-shadow:0 10px 30px rgba(0,0,0,.4);
-
-}
-
-
-
-.contact-box h3{
-
-color:#ffd700;
-margin-bottom:15px;
-
-}
-
-
-
-.contact-box p{
-
-color:#ddd;
-margin:10px;
-
-}
-
-
-
-.contact-box a{
-
-color:#ffd700;
-text-decoration:none;
-font-weight:bold;
-
-}
-
-
-
-
-.empty{
-
-display:none;
-text-align:center;
+font-size:22px;
 padding:40px;
-color:#aaa;
-
 }
 
+.error{
+text-align:center;
+color:red;
+padding:20px;
+font-size:18px;
+}
 
-
-
-/* mobile */
-
+footer{
+margin-top:30px;
+padding:20px;
+text-align:center;
+color:#777;
+}
 
 @media(max-width:700px){
 
-
-body{
-
-padding:10px;
-
+table{
+font-size:14px;
 }
-
-
-
-.header h1{
-
-font-size:22px;
-
-}
-
-
 
 th,td{
-
-padding:10px 5px;
-font-size:13px;
-
+padding:10px;
 }
 
-
-
-.name{
-
-max-width:180px;
-
+header{
+font-size:22px;
 }
-
-
-
-.search{
-
-height:38px;
-
-}
-
 
 }
 
 </style>
 
-
 </head>
-
 
 <body>
 
+<header>
+
+فروشگاه قطعات خودرو
+
+</header>
 
 <div class="container">
 
-
-<div class="header">
-
-<h1>
-🚗 لیست قیمت قطعات خودرو
-</h1>
-
-<p>
-اسکندانی
-</p>
-
-</div>
-
-
-
-<div class="search-box">
-
 <input
-
-class="search"
-
 id="search"
+class="search"
+type="text"
+placeholder="جستجو بر اساس کد یا نام کالا">
 
-placeholder="🔍 جستجوی کالا یا کد کالا..."
+<div id="loading" class="loading">
 
->
+در حال دریافت اطلاعات...
 
 </div>
 
+<div id="error" class="error"></div>
 
-
-<div class="table-box" id="pdfContent">
-
-
-<table>
+<table id="table" style="display:none">
 
 <thead>
 
 <tr>
 
-<th>
-کد کالا
-</th>
+<th>کد کالا</th>
 
-<th>
-عنوان کالا
-</th>
+<th>نام کالا</th>
 
-<th>
-قیمت
-</th>
+<th>قیمت</th>
 
 </tr>
 
 </thead>
 
-
-<tbody id="list">
+<tbody id="tbody">
 
 </tbody>
 
-
 </table>
 
-
-<div id="empty" class="empty">
-
-کالایی پیدا نشد
-
 </div>
 
+<footer>
 
-</div>
+قدرت گرفته از Google Sheets
 
+</footer>
 
-
-<div class="pdf-area">
-
-<button class="pdf-btn" onclick="savePDF()">
-
-📄 ذخیره PDF
-
-</button>
-
-</div>
-
-
-
-<div class="contact-box">
-
-
-<h3>
-📞 اطلاعات تماس
-</h3>
-
-
-<p>
-☎️ تماس:
-<a href="tel:09924389248">
-09924389248
-</a>
-</p>
-
-
-<p>
-💬 واتساپ:
-<a href="https://wa.me/989924389248">
-09924389248
-</a>
-</p>
-
-
-<p>
-📱 روبیکا:
-09924389248
-</p>
-
-
-</div>
 <script>
 
-
-const list = document.getElementById("list");
-const search = document.getElementById("search");
-const empty = document.getElementById("empty");
-
-
-let products = [];
-
-
-
-// دریافت اطلاعات از Google Sheet
-
-fetch("https://docs.google.com/spreadsheets/d/1OImD12FCHFiDxzN-h8lBWox2gM2jCmaAntPI_NjfWsg/gviz/tq?tqx=out:json")
-
-
-.then(res => res.text())
-
-
-.then(text => {
-
-
-const json = JSON.parse(text.substring(47).slice(0,-2));
-
-
-
-products = json.table.rows.map(row => {
-
-
-return {
-
-code: row.c[0]?.v?.toString() || "",
-
-name: row.c[1]?.v?.toString() || "",
-
-price: row.c[2]?.v?.toString() || ""
-
-};
-
-
-});
-
-
-
-show(products);
-
-
-})
-
-
-.catch(error => {
-
-
-console.log("خطا در دریافت اطلاعات:",error);
-
-
-});
-
-
-
-
-
-
-
-// تبدیل قیمت به ریال
-
-
-function formatPrice(price){
-
-
-let num = price.replace(/,/g,"");
-
-
-
-if(!isNaN(num) && num !== ""){
-
-
-return Number(num).toLocaleString("fa-IR") + " ریال";
-
-
-}
-
-
-return price + " ریال";
-
-
-}
-
-
-
-
-
-
-
-
-function show(data){
-
-
-let html = "";
-
-
-
-if(data.length === 0){
-
-
-list.innerHTML = "";
-
-empty.style.display="block";
-
-
-return;
-
-}
-
-
-
-empty.style.display="none";
-
-
-
-
-
-data.forEach(item=>{
-
-
-html += `
-
-
-<tr>
-
-
-<td class="code">
-
-${item.code}
-
-</td>
-
-
-
-<td class="name">
-
-${item.name}
-
-</td>
-
-
-
-<td class="price">
-
-${formatPrice(item.price)}
-
-</td>
-
-
-
-</tr>
-
-
-`;
-
-
-
-});
-
-
-
-list.innerHTML = html;
-
-
-}
-
-
-
-
-
-
-
-// جستجو
-
-
-search.addEventListener("input",()=>{
-
-
-let value = search.value.trim();
-
-
-
-let result = products.filter(item =>
-
-
-item.name.includes(value) ||
-
-item.code.includes(value)
-
-
-);
-
-
-
-show(result);
-
-
-
-});
-
-
-
-
-
-
-
-// ساخت PDF
-
-
-async function savePDF(){
-
-
-
-const element = document.getElementById("pdfContent");
-
-
-
-const canvas = await html2canvas(element,{
-
-scale:2
-
-});
-
-
-
-const imgData = canvas.toDataURL("image/png");
-
-
-
-const {jsPDF} = window.jspdf;
-
-
-
-const pdf = new jsPDF(
-
-"p",
-
-"mm",
-
-"a4"
-
-);
-
-
-
-const width = 190;
-
-
-
-const height = canvas.height * width / canvas.width;
-
-
-
-pdf.addImage(
-
-imgData,
-
-"PNG",
-
-10,
-
-10,
-
-width,
-
-height
-
-);
-
-
-
-pdf.save("لیست-قیمت-قطعات.pdf");
-
-
-}
-
-
-
-
-
-
-
-
-// بروزرسانی خودکار هر دقیقه
-
-
-setInterval(()=>{
-
-
-location.reload();
-
-
-},600000);
-
-
+/* بخش دوم اینجا قرار می‌گیرد */
 
 </script>
-
 
 </body>
 
 </html>
+// ===============================
+// آدرس شیت را بعداً اینجا قرار بده
+// ===============================
+
+const SHEET_URL = "https://docs.google.com/spreadsheets/d/1OImD12FCHFiDxzN-h8lBWox2gM2jCmaAntPI_NjfWsg/edit?usp=drivesdk";
+
+// لیست کالاها
+let products = [];
+
+// دریافت اطلاعات
+async function loadProducts() {
+
+    if (!SHEET_URL) {
+        document.getElementById("loading").style.display = "none";
+        document.getElementById("error").innerHTML =
+            "لینک Google Sheet تنظیم نشده است.";
+        return;
+    }
+
+    try {
+
+        const res = await fetch(SHEET_URL);
+
+        const text = await res.text();
+
+        const json = JSON.parse(
+            text.substring(47).slice(0, -2)
+        );
+
+        const rows = json.table.rows;
+
+        products = [];
+
+        rows.forEach(row => {
+
+            if (!row.c) return;
+
+            products.push({
+
+                code: row.c[0]?.v ?? "",
+
+                name: row.c[1]?.v ?? "",
+
+                price: row.c[2]?.v ?? ""
+
+            });
+
+        });
+
+        showProducts(products);
+
+        document.getElementById("loading").style.display = "none";
+
+        document.getElementById("table").style.display = "table";
+
+    }
+
+    catch (e) {
+
+        document.getElementById("loading").style.display = "none";
+
+        document.getElementById("error").innerHTML =
+            "خطا در دریافت اطلاعات از شیت.";
+
+        console.log(e);
+
+    }
+
+}
+
+// نمایش کالاها
+function showProducts(list) {
+
+    const tbody = document.getElementById("tbody");
+
+    tbody.innerHTML = "";
+
+    list.forEach(item => {
+
+        tbody.innerHTML += `
+
+<tr>
+
+<td>${item.code}</td>
+
+<td>${item.name}</td>
+
+<td>${Number(item.price).toLocaleString("fa-IR")} تومان</td>
+
+</tr>
+
+`;
+
+    });
+
+}
+
+// جستجو
+document.getElementById("search").addEventListener("input", function () {
+
+    const value = this.value.trim();
+
+    const result = products.filter(item =>
+
+        String(item.code).includes(value) ||
+
+        String(item.name).includes(value)
+
+    );
+
+    showProducts(result);
+
+});
+
+// شروع برنامه
+loadProducts();
