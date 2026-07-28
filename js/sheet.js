@@ -1,55 +1,46 @@
-// ===============================
+// =========================
 // تنظیمات
-// ===============================
+// =========================
 
-// بعداً لینک Google Sheets را اینجا قرار بده
-const SHEET_URL = "https://docs.google.com/spreadsheets/d/1OImD12FCHFiDxzN-h8lBWox2gM2jCmaAntPI_NjfWsg/edit?usp=drivesdk";
+// فقط این را تغییر بده
+const SHEET_ID = "1OImD12FCHFiDxzN-h8lBWox2gM2jCmaAntPI_NjfWsg";
 
-// آرایه محصولات
+// شماره برگه
+const GID = "0";
+
+// خودکار لینک ساخته می‌شود
+const SHEET_URL =
+`https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&gid=${GID}`;
+
 let products = [];
 
-// ===============================
-// دریافت اطلاعات از شیت
-// ===============================
+async function loadProducts(){
 
-async function loadProducts() {
+    try{
 
-    if (SHEET_URL === "") {
+        document.getElementById("status").innerHTML="در حال دریافت اطلاعات...";
 
-        document.getElementById("status").innerHTML =
-        "لینک Google Sheet تنظیم نشده است.";
+        const res = await fetch(SHEET_URL);
 
-        hideLoader();
+        const text = await res.text();
 
-        return;
-
-    }
-
-    try {
-
-        const response = await fetch(SHEET_URL);
-
-        const text = await response.text();
-
-        const json = JSON.parse(
-            text.substring(47).slice(0, -2)
-        );
+        const json = JSON.parse(text.substr(47).slice(0,-2));
 
         const rows = json.table.rows;
 
-        products = [];
+        products=[];
 
-        rows.forEach(row => {
+        rows.forEach(row=>{
 
-            if (!row.c) return;
+            if(!row.c) return;
 
             products.push({
 
-                code: row.c[0]?.v ?? "",
+                code:row.c[0]?.v || "",
 
-                name: row.c[1]?.v ?? "",
+                name:row.c[1]?.v || "",
 
-                price: row.c[2]?.v ?? ""
+                price:row.c[2]?.v || ""
 
             });
 
@@ -57,19 +48,19 @@ async function loadProducts() {
 
         renderProducts(products);
 
-        document.getElementById("status").innerHTML =
-        products.length + " کالا یافت شد.";
+        document.getElementById("status").innerHTML=
+        products.length+" کالا";
 
         hideLoader();
 
     }
 
-    catch (err) {
+    catch(error){
 
-        console.log(err);
+        console.log(error);
 
-        document.getElementById("status").innerHTML =
-        "خطا در دریافت اطلاعات.";
+        document.getElementById("status").innerHTML=
+        "خطا در اتصال به Google Sheets";
 
         hideLoader();
 
@@ -77,26 +68,19 @@ async function loadProducts() {
 
 }
 
-// ===============================
-// نمایش محصولات
-// ===============================
-
 function renderProducts(list){
 
-    const container =
-    document.getElementById("products");
+    const box=document.getElementById("products");
 
-    container.innerHTML="";
+    box.innerHTML="";
 
     list.forEach(item=>{
 
-        container.innerHTML += `
+        box.innerHTML+=`
 
 <div class="card">
 
-<img
-src="https://via.placeholder.com/400x250?text=Auto+Parts"
-alt="${item.name}">
+<img src="https://placehold.co/400x250?text=Auto+Part">
 
 <div class="card-body">
 
@@ -104,7 +88,8 @@ alt="${item.name}">
 
 <div class="code">
 
-کد کالا : ${item.code}
+کد کالا :
+${item.code}
 
 </div>
 
@@ -114,7 +99,7 @@ ${Number(item.price).toLocaleString("fa-IR")} تومان
 
 </div>
 
-<a href="#" class="btn">
+<a class="btn" href="#">
 
 مشاهده
 
@@ -130,14 +115,9 @@ ${Number(item.price).toLocaleString("fa-IR")} تومان
 
 }
 
-// ===============================
-// مخفی کردن لودر
-// ===============================
-
 function hideLoader(){
 
-    const loader =
-    document.getElementById("loader");
+    const loader=document.getElementById("loader");
 
     if(loader){
 
@@ -147,11 +127,7 @@ function hideLoader(){
 
 }
 
-// ===============================
-// شروع برنامه
-// ===============================
-
-window.onload=function(){
+window.onload=()=>{
 
     loadProducts();
 
