@@ -1,72 +1,51 @@
 // ===============================
-// دکمه بازگشت به بالا
+// بازگشت به بالا
 // ===============================
 
 const topButton = document.getElementById("topButton");
 
-window.addEventListener("scroll", () => {
+if (topButton) {
 
-    if (window.scrollY > 300) {
+    window.addEventListener("scroll", () => {
 
-        topButton.style.display = "block";
-
-    } else {
-
-        topButton.style.display = "none";
-
-    }
-
-});
-
-topButton.addEventListener("click", () => {
-
-    window.scrollTo({
-
-        top: 0,
-
-        behavior: "smooth"
+        if (window.scrollY > 300) {
+            topButton.style.display = "block";
+        } else {
+            topButton.style.display = "none";
+        }
 
     });
 
-});
+
+    topButton.addEventListener("click", () => {
+
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+
+    });
+
+}
+
 
 // ===============================
 // منوی موبایل
 // ===============================
 
 const menuBtn = document.querySelector(".menu-btn");
-
 const nav = document.querySelector("nav");
 
-menuBtn.addEventListener("click", () => {
+if (menuBtn && nav) {
 
-    if (nav.style.display === "flex") {
+    menuBtn.addEventListener("click", () => {
 
-        nav.style.display = "none";
+        nav.classList.toggle("open");
 
-    } else {
+    });
 
-        nav.style.display = "flex";
+}
 
-        nav.style.flexDirection = "column";
-
-        nav.style.position = "absolute";
-
-        nav.style.top = "70px";
-
-        nav.style.right = "0";
-
-        nav.style.width = "100%";
-
-        nav.style.background = "#d50000";
-
-        nav.style.padding = "20px";
-
-        nav.style.gap = "15px";
-
-    }
-
-});
 
 // ===============================
 // سال فوتر
@@ -77,29 +56,29 @@ const footer = document.querySelector("footer div");
 if (footer) {
 
     footer.innerHTML =
-        "© " + new Date().getFullYear() +
-        " تمامی حقوق محفوظ است.";
+    "© " + new Date().getFullYear() +
+    " تمامی حقوق محفوظ است.";
 
 }
 
+
 // ===============================
-// افکت نمایش کارت‌ها
+// انیمیشن کارت‌ها
 // ===============================
 
-function animateCards() {
+function animateCards(){
 
     const cards = document.querySelectorAll(".card");
 
-    cards.forEach((card, index) => {
+    cards.forEach((card,index)=>{
 
         card.style.opacity = "0";
-        card.style.transform = "translateY(20px)";
 
-        setTimeout(() => {
+        setTimeout(()=>{
 
             card.style.transition = "0.4s";
+
             card.style.opacity = "1";
-            card.style.transform = "translateY(0)";
 
         }, index * 80);
 
