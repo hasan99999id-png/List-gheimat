@@ -111,7 +111,7 @@ function animateCards() {
 }
 
 // هر نیم ثانیه بررسی می‌کند که کارت جدید اضافه شده یا نه
-setInterval(animateCards, 500);
+setInterval(animateCards, 600000);
 
 // ===============================
 // پایان
