@@ -41,6 +41,13 @@ if (loader) {
 
     console.log(err);
 
-    document.getElementById("status").innerHTML = err;
+    document.getElementById("status").innerHTML =
+        "خطا در دریافت اطلاعات";
 
-  });
+    const loader = document.getElementById("loader");
+
+    if (loader) {
+        loader.style.display = "none";
+    }
+
+});
