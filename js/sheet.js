@@ -24,6 +24,7 @@ fetch(URL)
     });
 
     renderProducts(products);
+    animateCards();
 
     document.getElementById("status").innerHTML =
       products.length + " کالا";
