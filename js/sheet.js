@@ -85,11 +85,7 @@ function renderProducts(list) {
         box.innerHTML += `
 <div class="card">
 
-    <img
-    src="images/${item.code}.jpg"
-    alt="${item.name}"
-    onerror="this.src='images/no-image.jpg'"
->
+    <img src="images/${item.code}.jpg">
 
     <div class="card-body">
 
